@@ -41,14 +41,10 @@ router.post('/login',function(req,res,next) {
       }
       else if(pw == rows[0].pw){
         sess.name = rows[0].name
-        sess.pw = rows[0].pw;
+        sess.pw = rows[0].pw
         return req.session.save(function() {
           console.log('로그인 성공 ! 아이디 :'+sess.name+' 비밀번호 : '+sess.pw);
-          //res.redirect('/');
-          //res.send('로그인 성공 ! 아이디 :'+sess.name+' 비밀번호 : '+sess.pw);
-          res.render('main',{
-            sess : sess.name
-          })
+          res.redirect('/');
       })
       }else{
         res.send('입력하신 아이디 또는 비밀번호가 잘못되었습니다.');
@@ -90,7 +86,7 @@ router.post('/register',function(req,res,next) {
         return res.send('오류!',err);
         }else{
         console.log('회원가입성공!'+name+pw+school);
-        return res.send('성공')
+        res.redirect('/');
         // return res.redirect('/thanks.html');
         }
 })

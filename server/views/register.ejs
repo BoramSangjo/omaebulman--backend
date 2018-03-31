@@ -1,18 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-</head>
-<body>
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<script>
+			function tocheckpw1() {
+        	var pw = document.getElementById("pw").value;
+        	var pwck = document.getElementById("pwcheck").value;
+ 
+       		 if (pw != pwck) {
+            		alert('비밀번호가 틀렸습니다. 다시 입력해 주세요');
+           			 return false;
+       			 }
+    		}
+		</script>
+		<link rel="shortcut icon" href="images/favicon.ico">
+		<title>오매불만</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
 
-    <h1>오배불만 회원가입</h1>
-    <form action="/auth/register" method="post">
-      
-      아이디 <input type="text" name="name">
-      비밀번호 <input type="password" name="pw">
-      학교 <input type="text" name="school">
-      <input type="submit" value="회원가입완료">
-    </form>
-</body>
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<!-- Note: The "styleN" class below should match that of the banner element. -->
+					<header id="header">
+						<a href="/" class="logo"><img src="images/logo_1.png" width="32px" style="vertical-align: middle; margin: 10px;"><strong>오매불만</strong></a>
+						<nav>
+							<a href="#menu">메뉴</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="/">홈 화면으로</a></li>
+							<li><a href="/board/write">글 작성하기</a></li>
+							<li><a href="/board">게시판으로</a></li>
+						</ul>
+						<ul class="actions vertical">
+							<li><a href="/auth/register" class="button special fit">처음인가요?</a></li>
+							<li><a href="/auth/login" class="button fit">회원이신가요?</a></li>
+						</ul>
+					</nav>
+
+
+				<!-- Contact -->
+					<section id="contact">
+						<div class="inner">
+							<section>
+								<form method="post" action="/auth/register" onsubmit="tocheckpw1()">
+									<div class="field half">
+										<label for="school">학교</label>
+										<input type="text" name="school" id="school" />
+									</div>
+									<div class="field half">
+										<label for="email">아이디</label>
+										<input type="text" name="name" id="email" />
+									</div>
+									<div class="field half">
+										<label for="pw">비밀번호</label>
+										<input type="password" name="pw" id="pw" />
+									</div>
+
+									<div class="field half">
+										<label for="pwcheck">비밀번호 확인</label>
+										<input type="password" name="pwcheck" id="pwcheck" />
+									</div>
+
+									<ul class="actions">
+										<li><input type="submit" value="회원가입하기" class="special" /></li>
+										<li><input type="reset" value="취소" /></li>
+									</ul>
+								</form>
+							</section>
+							<section class="split">
+								<section>
+									<div class="contact-method">
+										<h3>가입하세요!</h3>
+										<span>익명성의 보호막 아래 맘껏 자신의 의견을 표출하세요!</span>
+									</div>
+								</section>
+								<section>
+									<div class="contact-method">
+										<h3>괜찮습니다!</h3>
+										<span>개인정보 요구를 최소한으로 하여 정보 유출 걱정이 없습니다!</span>
+									</div>
+								</section>
+							</section>
+						</div>
+					</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="copyright">
+								<li>보람상조</li>
+								<li>김영서</li>
+								<li>김예원</li>
+								<li>박수정</li>
+								<li>안용욱</li>
+								<li>황선우</li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="js/jquery.min.js"></script>
+			<script src="js/jquery.scrolly.min.js"></script>
+			<script src="js/jquery.scrollex.min.js"></script>
+			<script src="js/skel.min.js"></script>
+			<script src="js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="js/main.js"></script>
+
+	</body>
 </html>

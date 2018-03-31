@@ -1,14 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-</head>
-<body>
-    <h1>오매불만</h1>
-    
-    <a href="/board/">불만접수</a>
-    <a href="/auth/register">회원가입</a>
-    <a href="/auth/login">로그인</a>
-</body>
+<!DOCTYPE HTML>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<link rel="shortcut icon" href="images/favicon.ico">
+		<title>오매불만</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo"><img src="images/logo_1.png" width="32px" style="vertical-align: middle; margin: 10px;"><strong>오매불만</strong></a>
+						<nav>
+							<a href="#menu">메뉴</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="/">홈 화면으로</a></li>
+							<li><a href="/board/write">글 작성하기</a></li>
+							<li><a href="/board">게시판으로</a></li>
+						</ul>
+						<ul class="actions vertical">
+								<div>
+										<h1>회원 시스템</h1>
+										<% 
+										if(sess == null){ %>
+											<li><a href="/auth/register" class="button special fit">처음인가요?</a></li>
+											<li><a href="/auth/login" class="button fit">회원이신가요?</a></li>
+										<%} %>
+										<% if(sess != null){ %>
+											<%= sess %> 님 환영합니다.
+											<%} %>
+									</div>
+						</ul>
+					</nav>
+
+				<!-- Banner -->
+					<section id="banner" class="major">
+						<div class="inner">
+							<header class="major">
+								<h1>언제나 불만 가득한 당신을 위해</h1>
+							</header>
+							<div class="content">
+								<p>인간관계에 의해 스트레스받는 현대인을 위한 불만관리 솔루션!<br/>상대방의 면전에 대고 불만을 토로하기 힘드셨던 여러분을 위해 오매불만이 익명으로 불만을 전해드립니다!</p>
+								<ul class="actions">
+									<li><a href="/board/write" class="button next scrolly">불만 접수하기</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+				
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<ul class="copyright">
+								<li>보람상조</li>
+								<li>김영서</li>
+								<li>김예원</li>
+								<li>박수정</li>
+								<li>안용욱</li>
+								<li>황선우</li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="js/jquery.min.js"></script>
+			<script src="js/jquery.scrolly.min.js"></script>
+			<script src="js/jquery.scrollex.min.js"></script>
+			<script src="js/skel.min.js"></script>
+			<script src="js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="js/main.js"></script>
+
+	</body>
 </html>

@@ -46,7 +46,9 @@ router.post('/login',function(req,res,next) {
           console.log('로그인 성공 ! 아이디 :'+sess.name+' 비밀번호 : '+sess.pw);
           //res.redirect('/');
           //res.send('로그인 성공 ! 아이디 :'+sess.name+' 비밀번호 : '+sess.pw);
-          res.sendStatus(200);
+          res.render('main',{
+            sess : sess.name
+          })
       })
       }else{
         res.send('입력하신 아이디 또는 비밀번호가 잘못되었습니다.');
@@ -59,11 +61,14 @@ router.post('/login',function(req,res,next) {
 router.get('/register',function(req,res,next) {
   var name = req.params.name;
   var pw = req.params.pw;
+  var school = req.params.school;
   res.render('register');
 })
+
 router.post('/register',function(req,res,next) {
   var name = req.body.name;
   var pw = req.body.pw;
+  var school = req.body.school;
   // var registerInfo = [
   //   id,name,pw
   // ];
@@ -76,15 +81,15 @@ router.post('/register',function(req,res,next) {
       return console.log(err);
     }else{
       if(rows[0] == null){
-        var sql = `INSERT INTO userinfo (name,pw)
-        VALUES(?,?)`
-        var params = [name,pw];
+        var sql = `INSERT INTO userinfo (name,pw,school)
+        VALUES(?,?,?)`
+        var params = [name,pw,school];
         conn.query(sql,params,function(err,rows,fields) {
         if(err){
         console.log(err);
         return res.send('오류!',err);
         }else{
-        console.log('회원가입성공!'+name+pw);
+        console.log('회원가입성공!'+name+pw+school);
         return res.send('성공')
         // return res.redirect('/thanks.html');
         }

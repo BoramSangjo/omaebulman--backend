@@ -36,64 +36,40 @@
 							<li><a href="/board">게시판으로</a></li>
 						</ul>
 						<ul class="actions vertical">
-
-										<% 
-										if(sess == null){ %>
-											<li><a href="/auth/register" class="button special fit">처음인가요?</a></li>
-											<li><a href="/auth/login" class="button fit">회원이신가요?</a></li>
-										<%} %>
-										<% if(sess != null){ %>
-											<%= sess %> 님 환영합니다.
-											<%} %>
+							<li><a href="/auth/register" class="button special fit">처음인가요?</a></li>
+							<li><a href="/auth/login" class="button fit">회원이신가요?</a></li>
 						</ul>
 					</nav>
 
 				<!-- Contact -->
 					<section>
 				        <article>
-				            <center> 
-				            <h1>오매불만 게시판</h1> 
+				            <div style="padding: 0px 100px">
+				            	<center> 
+				            <h1>게시판</h1> 
 				                <table>
 				                    <thead>
-				                        <tr>
-				                            <th width="70">번호</th>
-				                            <th width="120">제목</th>
-				                            <th width="500">내용</th>
-				                            <th width="100">작성일</th>
-				                        </tr>
+				                        <td>
+                                  <%=
+                                  rows[0].title
+                                  %>
+				                        </td>
 				                    </thead>
 				                    <tbody>
-                              <%
-                              for(var i =0; i< length ; i++){%>
-                                 </a>
-				                        <tr>
-                                    <td width="70"> 
-                                      <a href="/board/ <%= rows[i].id %>">
-                                       <%= rows[i].id %>
-                                      </a>
-                                    </td>
-				                            <td width="120">
-                                        <a href="/board/ <%= rows[i].id %>">
-                                      <%= rows[i].title %>
-                                        </a>
-                                    </td>
-				                            <td width="500">
-                                        <a href="/board/ <%= rows[i].id %>">
-                                      <%= rows[i].description %>
-                                        </a>
-                                    </td>
-				                            <td width="100">
-                                        <a href="/board/ <%= rows[i].id %>">
-                                      <%= rows[i].date %>
-                                        </a>
-                                    </td>
-                                </tr>
-                                
-                                <% } %>
+				                        <td colspan="4" width="100%">
+				                        	<span>
+                                    <%=
+                                    rows[0].description
+                                    %>
+				                        	</span>
+				                        </td>
 				                    </tbody>
-				                </table>
+                        </table>
+                        <form action="/board/delete/<%= rows[0].id %>" method="post">
+                          <input type="submit" value="삭제">
+                        </form>
 				            </center>
-				            
+				            </div>
 				        </article>    
 				    </section>
 

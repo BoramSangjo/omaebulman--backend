@@ -15,7 +15,11 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 
 router.get('/',function(req,res,next) {
-  res.render('main');
+  var sess = req.session;
+
+  res.render('main',{
+    sess : sess.name
+  });
 })
 
 

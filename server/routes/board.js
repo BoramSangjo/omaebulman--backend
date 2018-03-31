@@ -15,7 +15,7 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 
 router.get('/',function(req,res,next) {
-
+  var sess = req.session;
   var todayDate = new Date().toISOString().slice(0,10);
   var data = {};
   var sql = `select * from board`;
@@ -24,7 +24,11 @@ router.get('/',function(req,res,next) {
       console.log(err);
     }else{
       console.log("게시판 조회 요청 들어왔습니다."+todayDate);
-      res.json(rows);
+      res.render('board',{
+        sess: sess.name,
+        length : rows.length,
+        rows:rows
+      });
       // var boardLength = rows.length;
       // res.send(""+boardLength);
       // res.render('board',{
@@ -36,7 +40,7 @@ router.get('/',function(req,res,next) {
 })
 
 router.get('/write',function(req,res,feilds) {
-  res.render('write')
+  res.render('write');
 })
 
 router.get('/:id',function(req,res,feilds) {
@@ -53,7 +57,11 @@ router.get('/:id',function(req,res,feilds) {
       var params = [boardId];
       conn.query(sql,params,function(er,rows,fields) {
         console.log('글'+boardId+"조회 요청");
-        res.json(rows);  
+        boardId = boardId +1 ;
+        res.render('boardView',{
+          rows: rows,
+          id : boardId
+        });  
       })
     }
   })
@@ -74,7 +82,8 @@ router.post('/write',function(req,res,next) {
       return res.status(500);
     }else{
       console.log("추가성공"+title+description+todayDate);
-      res.send("추가성공"+title+description+todayDate);
+      res.redirect("/board");
+      //res.send("추가성공"+title+description+todayDate);
     }
   })
 })
@@ -87,11 +96,13 @@ router.post('/delete/:id',function(req,res,next) {
     if(err){
       console.log(err);
     } else {
-      console.log(rows);
-      res.json(rows);
+      console.log("삭제성공");
+      res.redirect('/board');
     }
   });
 })
+
+
 
 
 module.exports = router;

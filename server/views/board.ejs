@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+
+    <h1>현재 불만 목록 입니다.</h1>
+    <table border="1">
+      <tr>
+        <td>번호</td>
+        <td>제목</td>
+        <td>조회수</td>
+      </tr>
+      <% for(var i =0; i< boardLength; i++){ %>
+      <tr>
+          <td>
+              <a href="/board/<%= rows[i].id %>" > 
+               <%=rows[i].id %>
+              </a>
+            </td>
+  
+            <td>
+              <%=rows[i].title%>   
+            </td>
+          
+          <td>
+             <%= rows[i].hit %>
+          </td>
+            
+      </tr>
+ <%      } %>
+    </table>
+
+    <a href="/board/write">글쓰기</a>
+</body>
+</html>

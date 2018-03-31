@@ -40,10 +40,14 @@ router.get('/',function(req,res,next) {
 })
 
 router.get('/write',function(req,res,feilds) {
-  res.render('write');
+  var sess = req.session
+  res.render('write',{
+    sess : sess.name
+  });
 })
 
 router.get('/:id',function(req,res,feilds) {
+  var sess = req.session
   var boardId = req.params.id;
   var sql = `UPDATE board SET hit = hit + 1 WHERE id = ? `;
   var params = []
@@ -59,6 +63,7 @@ router.get('/:id',function(req,res,feilds) {
         console.log('글'+boardId+"조회 요청");
         boardId = boardId +1 ;
         res.render('boardView',{
+          sess : sess.name,
           rows: rows,
           id : boardId
         });  

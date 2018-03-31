@@ -37,6 +37,8 @@
 						</ul>
 						<ul class="actions vertical">
 
+								<div>
+										<h1>회원 시스템</h1>
 										<% 
 										if(sess == null){ %>
 											<li><a href="/auth/register" class="button special fit">처음인가요?</a></li>
@@ -44,7 +46,9 @@
 										<%} %>
 										<% if(sess != null){ %>
 											<%= sess %> 님 환영합니다.
+											<li><a href="/auth/logout" class="button fit">로그아웃</a></li>
 											<%} %>
+									</div>
 						</ul>
 					</nav>
 

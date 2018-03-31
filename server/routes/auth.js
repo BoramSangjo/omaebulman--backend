@@ -15,11 +15,17 @@ var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 
 router.get('/',function(req,res,next) {
-    res.render('auth');
+    var sess = req.session
+    res.render('auth',{
+      sess : sess.name
+    });
 })
 
 router.get('/login',function(req,res,next) {
-  res.render('login');
+  var sess = req.session
+  res.render('login',{
+    sess : sess.name
+  });
 })
 
 router.post('/login',function(req,res,next) {
@@ -58,7 +64,18 @@ router.get('/register',function(req,res,next) {
   var name = req.params.name;
   var pw = req.params.pw;
   var school = req.params.school;
-  res.render('register');
+  var sess = req.session;
+  res.render('register',{
+    sess : sess.name
+  });
+})
+
+router.get('/logout',function(req,res,next) {
+  
+  delete req.session.name;
+  delete req.session.pw;
+  console.log('로그아웃');
+  res.send(`<script>alert('로그아웃 되었습니다. 안녕히가세요'); location.href='/';</script>`);
 })
 
 router.post('/register',function(req,res,next) {

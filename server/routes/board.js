@@ -29,26 +29,26 @@ router.get('/',function(req,res,next) {
         length : rows.length,
         rows:rows
       });
-      // var boardLength = rows.length;
-      // res.send(""+boardLength);
-      // res.render('board',{
-      //   boardLength : boardLength,
-      //   rows : rows
-      // })
     }
   })
 })
 
 router.get('/write',function(req,res,feilds) {
   var sess = req.session
-  res.render('write',{
-    sess : sess.name
-  });
+  console.log(sess);
+  if(sess.name == null){
+    res.send(`<script>alert('글 작성은 회원만 이용할 수 있는 서비스입니다.로그인후 다시 시도해 주세요'); location.href='/';</script>`);
+  }else{
+    res.render('write',{
+      sess : sess.name
+    });    
+  }
 })
 
 router.get('/:id',function(req,res,feilds) {
   var sess = req.session
   var boardId = req.params.id;
+  // 조회수 증가
   var sql = `UPDATE board SET hit = hit + 1 WHERE id = ? `;
   var params = []
   conn.query(sql,boardId,function(err,rows,field) {
@@ -56,37 +56,50 @@ router.get('/:id',function(req,res,feilds) {
       console.log(err);
     }else{
       console.log(""+boardId);
-      //res.send(""+boardId);
+      //해당 글 조회
       var sql = `SELECT * from board where id = ?`;
       var params = [boardId];
       conn.query(sql,params,function(er,rows,fields) {
-        console.log('글'+boardId+"조회 요청");
-        boardId = boardId +1 ;
-        res.render('boardView',{
-          sess : sess.name,
-          rows: rows,
-          id : boardId
-        });  
+        var boardRows = rows;
+        var sql = `SELECT * from userinfo where name = ?`
+        var params = [rows[0].writer]
+        conn.query(sql,params,function(err,rows,fields) {
+          var userRows = rows;
+          if(err){
+            console.log("에러 ! " +err);
+            return res.send('err');
+          }
+          console.log('글'+boardId+"조회 요청");
+          boardId = boardId +1 ;
+          //res.send(boardRows[0].title + userRows[0].school);
+          //res.json(boardRows[0].title + " " +userRows[0].school  );
+          res.render('boardView',{
+            sess : sess.name,
+            boardRows: boardRows,
+            userRows : userRows,
+            id : boardId
+          });      
+        })
       })
     }
   })
-
 })
 
 router.post('/write',function(req,res,next) {
+  var sess = req.session;
   var title = req.body.title;
   var description = req.body.description;
 
   var todayDate = new Date().toISOString().slice(0,10);
-
-  var sql = `INSERT INTO board (title,description,date) values (?,?,?)`
-  var params = [title,description,todayDate];
+  var writer = sess.name;
+  var sql = `INSERT INTO board (title,description,date,writer) values (?,?,?,?)`
+  var params = [title,description,todayDate,writer];
   conn.query(sql,params,function(err,rows,field) {
     if(err){
       console.log(err);
       return res.status(500);
     }else{
-      console.log("추가성공"+title+description+todayDate);
+      console.log("추가성공"+" "+title+" "+description+" "+todayDate+" "+writer);
       res.redirect("/board");
       //res.send("추가성공"+title+description+todayDate);
     }

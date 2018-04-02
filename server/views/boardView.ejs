@@ -38,13 +38,13 @@
 						<ul class="actions vertical">
 								<div>
 										<h1>회원 시스템</h1>
-										<% 
+										<% 	
 										if(sess == null){ %>
 											<li><a href="/auth/register" class="button special fit">처음인가요?</a></li>
 											<li><a href="/auth/login" class="button fit">회원이신가요?</a></li>
 										<%} %>
 										<% if(sess != null){ %>
-											<%= sess %> 님 환영합니다.
+											아이디 <%= sess %> 님 환영합니다.
 											<li><a href="/auth/logout" class="button fit">로그아웃</a></li>
 											<%} %>
 									</div>
@@ -57,15 +57,15 @@
 				            <div style="padding: 0px 100px">
 				            	<center> 
 				            <h1>
-                      <%=
-                      rows[0].title
-                      %>
+                      
+											<%= boardRows[0].title %> -  <%= userRows[0].school %>
+                      
                     </h1> 
 				                <table>
 				                    <thead>
 				                        <td>
                                   <%=
-                                  rows[0].title
+                                  boardRows[0].title
                                   %>
 				                        </td>
 				                    </thead>
@@ -73,13 +73,13 @@
 				                        <td colspan="4" width="100%">
 				                        	<span>
                                     <%=
-                                    rows[0].description
+                                    boardRows[0].description
                                     %>
 				                        	</span>
 				                        </td>
 				                    </tbody>
                         </table>
-                        <form action="/board/delete/<%= rows[0].id %>" method="post">
+                        <form action="/board/delete/<%= boardRows[0].id %>" method="post">
                           <input type="submit" value="삭제">
                         </form>
 				            </center>
